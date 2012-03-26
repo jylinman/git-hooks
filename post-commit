@@ -2,17 +2,20 @@
 <?php
 
 $dirname = dirname(__FILE__);
-require "{$dirname}/Config.php";
+require "{$dirname}/config.php";
 
 $commandsToRun = $CONFIG['postCommit'];
 if (!is_array($commandsToRun)) exit(0);
 
-foreach ($commandsToRun as $command) {
-    $output = array();
-    $return = 0;
-    exec("{$dirname}/{$command}", $output, $return);
-    if ($return != 0) {
-        echo implode("\n", $output) . "\n";
-        exit(1);
-    }
+foreach ($commandsToRun as $command)
+{
+	$output = array();
+	$return = 0;
+	exec("{$dirname}/{$command}", $output, $return);
+	
+	if ($return != 0)
+	{
+		echo implode("\n", $output) . "\n";
+		exit(1);
+	}
 }
